@@ -12,49 +12,58 @@ from sklearn.decomposition import PCA
 class Decomposition:
     """ 次元削減を行う """
 
-    def __init__(self):
-        self.pca = PCA(n_components=2)
+    def __init__(self, n=2):
+        self.pca = PCA(n_components=n)
 
-    # def print(test)
+    def transform(self, features):
+        """ 次元削減処理 """
+        # pca
+        return self.pca_transfrom(features)
+    
+    def pca_transfrom(self, features):
+        """ 主成分分析(PCA) """
 
-if __name__ == '__main__':
-    from PIL import Image
-    from skimage import data
-    import numpy as np
-    import os
-    from sklearn.decomposition import PCA
-    from sklearn.cluster import KMeans
-    import matplotlib.pyplot as plt
+        self.pca.fit(features)
+        return self.pca.fit_transform(features)
 
-    image = "../images/gray_faces/gray_4aa529273547b86d3521b358c1ad1e43.jpg"
-    image = "gray_4aa529273547b86d3521b358c1ad1e43.jpg"
-    as_arrayed_img = np.asarray(data.imread(f'../images/gray_faces/{image}'))
-    # print(as_arrayed_img.shape)
+# if __name__ == '__main__':
+#     from PIL import Image
+#     from skimage import data
+#     import numpy as np
+#     import os
+#     from sklearn.decomposition import PCA
+#     from sklearn.cluster import KMeans
+#     import matplotlib.pyplot as plt
 
-    features = np.array([data.imread(f'../images/gray_faces/{path}') for path in os.listdir('../images/gray_faces')])
-    features = features.reshape(len(features), -1).astype(np.float64)
-    print(len(features))
+#     image = "../images/gray_faces/gray_4aa529273547b86d3521b358c1ad1e43.jpg"
+#     image = "gray_4aa529273547b86d3521b358c1ad1e43.jpg"
+#     as_arrayed_img = np.asarray(data.imread(f'../images/gray_faces/{image}'))
+#     # print(as_arrayed_img.shape)
 
-    pca = PCA(n_components=2)
-    pca.fit(features)
-    reduced = pca.fit_transform(features)
-    # print(reduced)
-    # print(reduced.shape)
-    # print(len(reduced))
-    # reduced = features
+#     features = np.array([data.imread(f'../images/gray_faces/{path}') for path in os.listdir('../images/gray_faces')])
+#     features = features.reshape(len(features), -1).astype(np.float64)
+#     print(len(features))
 
-    kmeans = KMeans(n_clusters=2).fit(reduced)
-    pred_label = kmeans.predict(reduced)
-    print(pred_label)
-    print(reduced[0])
-    print(reduced[1])
-    print(reduced[2])
-    print(reduced[4])
-    print(reduced[5])
+#     pca = PCA(n_components=2)
+#     pca.fit(features)
+#     reduced = pca.fit_transform(features)
+#     # print(reduced)
+#     # print(reduced.shape)
+#     # print(len(reduced))
+#     # reduced = features
 
-    # クラスタリングした結果をプロット
-    x = reduced[:, 0]
-    y = reduced[:, 1]
-    plt.scatter(x, y, c=pred_label)
-    plt.colorbar()
-    plt.show()
+#     kmeans = KMeans(n_clusters=2).fit(reduced)
+#     pred_label = kmeans.predict(reduced)
+#     print(pred_label)
+#     print(reduced[0])
+#     print(reduced[1])
+#     print(reduced[2])
+#     print(reduced[4])
+#     print(reduced[5])
+
+#     # クラスタリングした結果をプロット
+#     x = reduced[:, 0]
+#     y = reduced[:, 1]
+#     plt.scatter(x, y, c=pred_label)
+#     plt.colorbar()
+#     plt.show()

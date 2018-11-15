@@ -3,3 +3,7 @@ scikit-learn==0.20.0
 sklearn==0.0
 facenet==1.0.3
 flake8==3.6.0
+beautifulsoup4==4.6.3
+flake8==3.6.0
+scikit-image==0.14.1
+pandas==0.23.4
